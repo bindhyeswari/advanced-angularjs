@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script>
+        angular.module('myApp', []).controller('MyController', function ($ajaxLikhita, $scope, $q, $http) {
+            $scope.message = 'Hello';
+
+            // simple example $q
+            var url = 'https://api.github.com/search/repositories?q=';
+
+            $q.all([$http.get(url + 'nodejs'), $http.get(url + 'reactjs')]).then(function (obj) {
+                console.log(arguments);
+            });
+
+            $ajaxLikhita.get('url').then(function () {
+
+            });
+
+        }).factory('$ajaxLikhita', function ($q) {
+            return {
+                get: function (url) {
+                    return $q(function (resolve, reject){
+
+                    });
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+    <div ng-controller="MyController">
+        {{message | uppercase}}
+    </div>
+</body>
+</html>

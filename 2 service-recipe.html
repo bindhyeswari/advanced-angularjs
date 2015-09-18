@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script>
+        angular.module('myApp', []).config(function (CERT_KEY) {
+            // configuration phase
+            console.log(CERT_KEY);
+        }).controller('MyController', function ($scope, Github) {
+            $scope.message = 'Hello';
+            Github.search('reactjs').success(function (data) {
+                console.log(data);
+            });
+        }).controller('C2', function (Github, CERT_TOKEN) {
+            console.log(CERT_TOKEN);
+            Github.search('angularjs').then(function (obj) {
+                console.log(obj);
+            }, function (obj) {
+                console.log(obj);
+            }, function (obj) {
+                console.log('whats this?');
+            });
+
+
+        }).service('Github', function GithubConstructor($http) {
+            // Constructor Function
+            // var Github = new GithubConstructor();
+            this.search = function (term) {
+                // perform the search and return the results
+                return $http.get('https://api.github.com/search/repositories?q=' + encodeURIComponent(term));
+            }
+        })
+                .constant('CERT_KEY', 'DBAEBB2A-7C84-4556-AFE1-4E5F61253217')
+                .value('CERT_TOKEN', 'DBAEBB2A-7C84-4556-AFE1-sdfsadfasdfsadf');
+    </script>
+</head>
+<body>
+<div ng-controller="MyController">
+    {{message}}
+</div>
+<div ng-controller="C2">
+    {{message}}
+</div>
+</body>
+</html>

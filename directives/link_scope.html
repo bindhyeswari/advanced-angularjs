@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title></title>
 
-    <script src="bower_components/angular/angular.js"></script>
-    <link rel="stylesheet" href="base.css"/>
+    <script src="../bower_components/angular/angular.js"></script>
+    <link rel="stylesheet" href="../base.css"/>
     <script type="text/ng-template" id="_register.html">
         <section>
             <header>
@@ -20,13 +20,19 @@
         // Directive is a marker on the DOM.
 
         angular.module('myApp', []).controller('MyController', function ($scope) {
-            $scope.message = 'Hello';
+            $scope.message = 'Hello from MyController!';
         }).directive('gllHello', function () {
             // this function will return a directive definition object
             return {
-                template: 'Click Me!',
+                template: '<div>Click Me! {{message}}</div>',
+                scope: true, // false --> scope of directive is same as the scope in effect |
+                // true --> directive scope is a child of the scope in effect
+                // isolate scope
                 link: function (scope, element) {
+                    // scope -->  scope of the directive
+                    scope.message = 'Changed by the directive!';
                     console.log(element);
+
                     element[0].addEventListener('click', function () {
                         console.log('Hello World');
                     });
@@ -37,13 +43,8 @@
 </head>
 <body>
 <div ng-controller="MyController">
-    {{message | uppercase}}
+    {{message}}
 
-    <div gll-hello></div>
-    <div gll-hello></div>
-    <div gll-hello></div>
-    <div gll-hello></div>
-    <div gll-hello></div>
     <div gll-hello></div>
 </div>
 </body>
