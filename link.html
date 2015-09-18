@@ -3,6 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+
     <script src="bower_components/angular/angular.js"></script>
     <link rel="stylesheet" href="base.css"/>
     <script type="text/ng-template" id="_register.html">
@@ -23,37 +24,27 @@
         }).directive('gllHello', function () {
             // this function will return a directive definition object
             return {
-                restrict: 'AECM',
-                /*template: '<button>Hello World from the gllHello directive!</button>'*/
-                templateUrl: '_register.html'
-                /*replace: true*/
+                template: 'Click Me!',
+                link: function (scope, element) {
+                    console.log(element);
+                    element[0].addEventListener('click', function () {
+                        console.log('Hello World');
+                    });
+                }
             }
         });
     </script>
 </head>
 <body>
-    <div ng-controller="MyController">
-        {{message | uppercase}}
+<div ng-controller="MyController">
+    {{message | uppercase}}
 
-        <ol>
-            <li>
-                <div>Attribute</div>
-                <div gll-hello></div>
-            </li>
-            <li>
-                <div>Element</div>
-                <gll-hello></gll-hello>
-            </li>
-            <li>
-                <div>Class</div>
-                <div class="gll-hello"></div>
-            </li>
-            <li>
-                <div>Comment</div>
-                <!--todo: BP: syntax for comment-->
-                <!-- gll-hello -->
-            </li>
-        </ol>
-
+    <div gll-hello></div>
+    <div gll-hello></div>
+    <div gll-hello></div>
+    <div gll-hello></div>
+    <div gll-hello></div>
+    <div gll-hello></div>
+</div>
 </body>
 </html>
