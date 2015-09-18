@@ -15,8 +15,9 @@
         }).directive('gllHello', function () {
             // this function will return a directive definition object
             return {
-                restrict: 'A',
-                template: 'Hello World from the gllHello directive!'
+                restrict: 'AECM',
+                template: '<button>Hello World from the gllHello directive!</button>'
+                /*replace: true*/
             }
         });
     </script>
@@ -24,7 +25,28 @@
 <body>
     <div ng-controller="MyController">
         {{message | uppercase}}
-        <div gll-hello></div>
+
+        <ol>
+            <li>
+                <div>Attribute</div>
+                <div gll-hello></div>
+            </li>
+            <li>
+                <div>Element</div>
+                <gll-hello></gll-hello>
+            </li>
+            <li>
+                <div>Class</div>
+                <div class="gll-hello"></div>
+            </li>
+            <li>
+                <div>Comment</div>
+                <!--todo: BP: syntax for comment-->
+                <!-- gll-hello -->
+            </li>
+        </ol>
+
+
     </div>
 
 </body>
