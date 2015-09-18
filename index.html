@@ -4,15 +4,28 @@
     <meta charset="UTF-8">
     <title></title>
     <script src="bower_components/angular/angular.js"></script>
+    <link rel="stylesheet" href="base.css"/>
     <script>
+
+        // What is a directive
+        // Directive is a marker on the DOM.
+
         angular.module('myApp', []).controller('MyController', function ($scope) {
             $scope.message = 'Hello';
+        }).directive('gllHello', function () {
+            // this function will return a directive definition object
+            return {
+                restrict: 'A',
+                template: 'Hello World from the gllHello directive!'
+            }
         });
     </script>
 </head>
 <body>
     <div ng-controller="MyController">
         {{message | uppercase}}
+        <div gll-hello></div>
     </div>
+
 </body>
 </html>
